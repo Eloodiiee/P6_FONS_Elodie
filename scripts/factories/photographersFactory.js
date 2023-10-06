@@ -15,7 +15,7 @@ export function articlePhotographer(data) {                             // Fonct
     //URL portrait
     linkPhotos.href = `photographer.html?id=${id}`; //Je créer un lien href pour chaque photographes basé sur l'ID
     
-    //classList / setAttribute // J'ajoute des classes et des attributes 
+    //classList / setAttribute // J'ajoute des classes et des attributes pour les container des portraits et img de portraits
     imgContainer.classList.add("imgContainer"); 
     img.classList.add("imgPortrait");
     img.setAttribute("src", portraitUrl);
