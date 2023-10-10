@@ -12,12 +12,13 @@ export function articlePhotographer(data) {                             // Fonct
     const priceElement = document.createElement("span");
     const portraitUrl = `assets/photographers/${portrait}`;         // J'ajoute l'URL du portrait de chaque photographes
     
-    //URL portrait
+    //Lien du phothographe basé sur l'ID
     linkPhotos.href = `photographer.html?id=${id}`; //Je créer un lien href pour chaque photographes basé sur l'ID
     
     //classList / setAttribute // J'ajoute des classes et des attributes pour les container des portraits et img de portraits
     imgContainer.classList.add("imgContainer"); 
     img.classList.add("imgPortrait");
+    img.setAttribute("id", city);
     img.setAttribute("src", portraitUrl);
     img.setAttribute("alt", name);
 

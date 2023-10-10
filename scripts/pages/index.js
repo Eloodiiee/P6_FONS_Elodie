@@ -6,7 +6,7 @@ import { articlePhotographer } from '../factories/photographersFactory.js';
 class photographers {
     constructor() { // initialisation du this.data grace au consturctor
         this.data = [];
-    }
+    } // mettre dans factory
  
     //Fonction asynchrone de fetch et appel de la fonction d'affichage des données
     async getPhotographers() {
@@ -14,7 +14,7 @@ class photographers {
         const res = await response.json();
         this.data = res.photographers; // Séparation du JSON pour ne garder que les photographes
         console.log(this.data);
-        this.displayData();
+        this.displayData(); //appelle la fonction displaydata une fois que le fetch est fait
        
     }
  

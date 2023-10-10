@@ -12,11 +12,16 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
+    margin-top: 20px;
+}
+main{
+    margin-bottom: 80px;
 }
 
 h1 {
     color: #901C1C;
     margin-right: 100px;
+    font-weight: 300;
 }
 
 .logo {
@@ -37,14 +42,66 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    
+}
+
+.photographer_section a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.photographer_section article span{
+    color: grey;
+    font-size: 13px;
+    font-weight: 400;
 }
 
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
+    text-align: center;
+    font-weight: 100;
+    margin-block-start: 20px;
+    margin-block-end: 0;
+   
 }
 
-.photographer_section article img {
+.photographer_section article h3 {
+    color:#901C1C ;
+    font-weight: 100;
+    margin-block-start: 0;
+    margin-block-end: 0;
+   
+}
+
+.photographer_section article h4 {
+   font-size: 15px;
+   margin-block-start: 0;
+   margin-block-end: 0;
+  
+}
+
+
+.imgContainer{
     height: 200px;
-    width: 200px;
+    width:  200px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+/*#London{
+   object-position: 60% 50%;
+   height: 100px;
+   width: 100px;
+}*/
+
+.photographer_section article img {
+    height: 262px;
+    width: 270px;
+    object-position: 67% 58%;
+    object-fit: cover;
+    overflow-clip-margin: unset;
+  
 }
