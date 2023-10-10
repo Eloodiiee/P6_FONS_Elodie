@@ -18,7 +18,7 @@ export function articlePhotographer(data) {                             // Fonct
     //classList / setAttribute // J'ajoute des classes et des attributes pour les container des portraits et img de portraits
     imgContainer.classList.add("imgContainer"); 
     img.classList.add("imgPortrait");
-    img.setAttribute("id", city);
+    img.setAttribute("id", country);
     img.setAttribute("src", portraitUrl);
     img.setAttribute("alt", name);
 
