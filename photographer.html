@@ -23,15 +23,31 @@
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
 				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
+					<div class="formData">
+						<label for="first">Prénom</label><br>
+            <input class="text-control" type="text" id="first" name="first"/><br>
+            <p id="firstNameErrorMsg"></p> <!--Message d'erreur du champ prénom-->
+          </div>
+          <div class="formData">
+            <label for="last">Nom</label><br>
+            <input class="text-control" type="text" id="last" name="last"/><br>
+            <p id="lastNameErrorMsg"></p> <!--Message d'erreur du champ nom-->
+          </div>
+          <div class="formData">
+            <label for="email">E-mail</label><br>
+            <input class="text-control" type="email" id="email" name="email"/><br>
+            <p id="emailErrorMsg"></p> <!--Message d'erreur du champ email-->
+          </div>
+          <div class="formData">
+						<label for="message">Message</label><br>
+            <textarea name="message" id="message" cols="30" rows="10" aria-required="true"></textarea><br>
+            <p id="messageErrorMsg"></p> <!--Message d'erreur du champ Message-->
+          </div>
           <button class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
+    <script type="module" src="/scripts/pages/photographer.js"></script> 
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>

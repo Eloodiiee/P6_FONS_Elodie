@@ -4,7 +4,7 @@ import { articlePhotographer } from '../factories/photographersFactory.js';
 
 // Je crée une classe qui va fetch les photographes et les afficher sur la page d'accueil
 class photographers {
-    constructor() { // initialisation du this.data grace au consturctor
+    constructor() { // initialisation du this.data grace au constructor
         this.data = [];
     } // mettre dans factory
  

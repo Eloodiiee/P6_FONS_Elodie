@@ -10,17 +10,17 @@ export function articlePhotographer(data) {                             // Fonct
     const placeContainer = document.createElement("h3");
     const taglineContainer = document.createElement("h4");
     const priceElement = document.createElement("span");
-    const portraitUrl = `assets/photographers/${portrait}`;         // J'ajoute l'URL du portrait de chaque photographes
+    const portraitUrl = `assets/photographers/${portrait}`; // J'ajoute l'URL du portrait de chaque photographes
     
     //Lien du phothographe basé sur l'ID
-    linkPhotos.href = `photographer.html?id=${id}`; //Je créer un lien href pour chaque photographes basé sur l'ID
+    linkPhotos.href = `photographer.html?id=${id}`;  //Je créer un lien href pour chaque photographes basé sur l'ID
     
     //classList / setAttribute // J'ajoute des classes et des attributes pour les container des portraits et img de portraits
     imgContainer.classList.add("imgContainer"); 
     img.classList.add("imgPortrait");
     img.setAttribute("id", country);
     img.setAttribute("src", portraitUrl);
-    img.setAttribute("alt", name);
+    img.setAttribute("alt",`portrait of ${name}`); // Ajout du texte "portrait of {}" pour éviter la redondance (accessibilité) pour les lecteurs d'écrans
 
     //textContent // Contenu des cartes ajoutées grâce aux données récupérées
     nameContainer.textContent = name;
