@@ -5,7 +5,6 @@ body {
     margin: 0;
 }
 
-
 header {
     display: flex;
     flex-direction: row;
@@ -41,8 +40,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    
+    flex-direction: column;  
 }
 
 .photographer_section a{
@@ -64,8 +62,7 @@ h1 {
     text-align: center;
     font-weight: 100;
     margin-block-start: 20px;
-    margin-block-end: 0;
-   
+    margin-block-end: 0;  
 }
 
 .photographer_section article h3 {
@@ -73,16 +70,13 @@ h1 {
     font-weight: 100;
     margin-block-start: 0;
     margin-block-end: 0;
-   
 }
 
 .photographer_section article h4 {
    font-size: 15px;
    margin-block-start: 0;
    margin-block-end: 0;
-  
 }
-
 
 .imgContainer{
     height: 200px;
@@ -125,6 +119,38 @@ h1 {
     height: 300px;
     width: 300px;
     object-fit: cover;
-    overflow-clip-margin: unset;
-  
+    overflow: clip;
+    overflow-clip-margin: unset; 
+}
+.photoContainer{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;  
+}
+
+.photoContainer img{
+    height: 230px;
+    width: 230px;
+    object-fit: cover;
+    overflow: clip;
+    overflow-clip-margin: unset;  
+}
+
+.infoContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoContainer h1{
+    font-size: 3em;
+    margin: 10px;
+    font-weight: bold;
+}
+.infoContainer h2{
+    font-size: 1.5em; 
+}
+.infoContainer span{
+    font-size: 1.2em; 
 }
