@@ -20,7 +20,7 @@ export function articlePhotographer(data) {                             // Fonct
     img.classList.add("imgPortrait");
     img.setAttribute("id", country);
     img.setAttribute("src", portraitUrl);
-    img.setAttribute("alt",`portrait of ${name}`); // Ajout du texte "portrait of {}" pour éviter la redondance (accessibilité) pour les lecteurs d'écrans
+    img.setAttribute("alt", " "/*`portrait of ${name}`*/); // Ajout du texte "portrait of {}" pour éviter la redondance (accessibilité) pour les lecteurs d'écrans
 
     //textContent // Contenu des cartes ajoutées grâce aux données récupérées
     nameContainer.textContent = name;

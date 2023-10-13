@@ -54,7 +54,7 @@ photographerInfos.headerData = function (){// Function d'affichage du data du ph
     const portraitPhotograph = `assets/photographers/${this.photographer.portrait}`; // J'assgine l'URL du portrait
     const imgPhotograph = document.createElement("img"); // Je crée un élément HTML img
     imgPhotograph.setAttribute("src", portraitPhotograph); // J'ajoute en source l'URL du portrait
-    imgPhotograph.setAttribute("alt",  `portrait of ${this.photographer.name}`); // Ajout du texte alternatif pour le portrait (accessibilité)
+    imgPhotograph.setAttribute("alt", " " /*`portrait of ${this.photographer.name}`*/); // Ajout du texte alternatif pour le portrait (accessibilité)
 
     headerPortrait.appendChild(imgPhotograph); // J'assigne le parent de l'image du photographe au container de la photo
 
