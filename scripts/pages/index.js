@@ -6,7 +6,7 @@ import { articlePhotographer } from '../factories/photographersFactory.js';
 class photographers {
     constructor() { // initialisation du this.data grace au constructor
         this.data = [];
-    } // mettre dans factory
+    } 
  
     //Fonction asynchrone de fetch et appel de la fonction d'affichage des données
     async getPhotographers() {

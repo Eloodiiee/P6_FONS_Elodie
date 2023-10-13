@@ -1,8 +1,5 @@
 
-/*import { articlePhotographer } from '../factories/photographersFactory.js';*/
-
 // Je crée une classe qui va fetch les photographes en ne gardant que le photographe selectionné
-// Je dois encore gérer l'affichage sur la page "photographer.html"
 class thePhotographer { 
     constructor() {
         this.data = []; // initialisation du this.data grace au constructor
