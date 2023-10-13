@@ -31,15 +31,7 @@ const photographerInfos = new thePhotographer();
 photographerInfos.getPhotographer(); // Appel de la fonction getPhotographer pour récuperer le photographe
 
 photographerInfos.headerData = function (){// Function d'affichage du data du photographe
-    const headerPortrait = document.querySelector(".photograph-header .photoContainer"); // Je sélectionne le container du portrait du photographe
-
-    const portraitPhotograph = `assets/photographers/${this.photographer.portrait}`; // J'assgine l'URL du portrait
-    const imgPhotograph = document.createElement("img"); // Je crée un élément HTML img
-    imgPhotograph.setAttribute("src", portraitPhotograph); // J'ajoute en source l'URL du portrait
-    imgPhotograph.setAttribute("alt",  `portrait of ${this.photographer.name}`); // Ajout du texte alternatif pour le portrait (accessibilité)
-
-    headerPortrait.appendChild(imgPhotograph); // J'assigne le parent de l'image du photographe au container de la photo
-
+    
     const headerInfo = document.querySelector(".photograph-header .infoContainer"); // Je sélectionne le container des informations du photographe
 
     const titlePhotograph = document.createElement("h1"); // Je crée un élément "h1"
@@ -56,6 +48,16 @@ photographerInfos.headerData = function (){// Function d'affichage du data du ph
     headerInfo.appendChild(titlePhotograph);  // J'assigne le parent du titre au container des infos du photographe
     headerInfo.appendChild(locationPhotograph); // J'assigne le parent du localisation au container des infos du photographe
     headerInfo.appendChild(tagline); // J'assigne le parent du tagline au container des infos du photographe
+
+    const headerPortrait = document.querySelector(".photograph-header .photoContainer"); // Je sélectionne le container du portrait du photographe
+
+    const portraitPhotograph = `assets/photographers/${this.photographer.portrait}`; // J'assgine l'URL du portrait
+    const imgPhotograph = document.createElement("img"); // Je crée un élément HTML img
+    imgPhotograph.setAttribute("src", portraitPhotograph); // J'ajoute en source l'URL du portrait
+    imgPhotograph.setAttribute("alt",  `portrait of ${this.photographer.name}`); // Ajout du texte alternatif pour le portrait (accessibilité)
+
+    headerPortrait.appendChild(imgPhotograph); // J'assigne le parent de l'image du photographe au container de la photo
+
 
    
 }
