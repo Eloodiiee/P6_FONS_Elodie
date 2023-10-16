@@ -10,7 +10,26 @@
     height: 300px;
     margin: 0 100px;
 }
+.bottomRightContainer{
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    width: 306px;
+    background: #DB8876;
+    padding: 15px 30px;
+    border-radius: 5px 5px 0 5px;
+    margin-right: 1.5em;
+}
 
+.bottomRightContainer span{
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 31px;
+    color: black;
+}
 .contact_button {
     font-size: 20px;
     font-weight: bold;

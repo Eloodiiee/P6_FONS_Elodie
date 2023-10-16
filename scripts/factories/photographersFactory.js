@@ -40,3 +40,35 @@ export function articlePhotographer(data) {                             // Fonct
     return article; // Retourne l'article une fois qu'il est construit
   
 }
+
+export function photographerPage(data){
+
+    const { portrait, name, country, city, tagline, price, id } = data; // Compilations des données dans un objet
+
+    const headerPhotograph = document.querySelector(".photograph-header"); // Je selectionne le header 
+    
+    const headerInfo = document.querySelector(".photograph-header .infoContainer"); // Je sélectionne le container des informations du photographe
+
+    const titlePhotograph = document.createElement("h1"); // Je crée un élément "h1"
+    titlePhotograph.textContent = name; // Je renseigne le nom du photographe dans le "h1"
+
+    const locationPhotograph = document.createElement("h2"); // Je crée un élément "h2"
+    locationPhotograph.textContent = `${city}, ${country}`;  // J'assigne le texte de la ville et du pays du photographe
+
+    const taglinePhotograph = document.createElement("span");  // Je crée un élément span
+    taglinePhotograph.textContent = tagline; // J'assigne le texte de la tagline au span
+
+    headerInfo.appendChild(titlePhotograph);  // J'assigne le parent du titre au container des infos du photographe
+    headerInfo.appendChild(locationPhotograph); // J'assigne le parent du localisation au container des infos du photographe
+    headerInfo.appendChild(taglinePhotograph); // J'assigne le parent du tagline au container des infos du photographe
+
+    const headerPortrait = document.querySelector(".photograph-header .photoContainer"); // Je sélectionne le container du portrait du photographe
+
+    const portraitPhotograph = `assets/photographers/${portrait}`; // J'assgine l'URL du portrait
+    const imgPhotograph = document.createElement("img"); // Je crée un élément HTML img
+    imgPhotograph.setAttribute("src", portraitPhotograph); // J'ajoute en source l'URL du portrait
+    imgPhotograph.setAttribute("alt", " " /*`portrait of ${this.photographer.name}`*/); // Ajout du texte alternatif pour le portrait (accessibilité)
+
+    headerPortrait.appendChild(imgPhotograph); // J'assigne le parent de l'image du photographe au container de la photo
+    return headerPhotograph // Retourne le header une fois qu'il est construit
+}

@@ -1,9 +1,12 @@
+import { photographerPage } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des infos du photographe
 
 // Je crée une classe qui va fetch les photographes en ne gardant que le photographe selectionné
 class thePhotographer { 
     constructor() {
         this.data = []; // initialisation du this.data grace au constructor
         this.photographer = null; //Initialisation du this.photographer grace au constructor
+        this.media = []; // Initialisation du this.media grace au constructor
+        this.likes = 0; //  Initialisation du this.likes grace au constructor
     }
 
 
@@ -15,15 +18,26 @@ class thePhotographer {
         const response = await fetch(`/data/photographers.json`)  
         const res = await response.json(); 
         this.data = res.photographers; // Séparation du JSON pour ne garder que les photographes
-        console.log(this.data); // Affichage de tout les photographes
+        console.log(this.data); // Affichage du photographes
+        this.media = res.media; // Séparation du JSON pour ne garder que les medias
+        console.log(this.media); // Affichage de tout les medias
+        
+
         this.data.forEach((photographerData) => { // Boucle forEach qui permet de naviguer dans l'array des photographes
             if(photographerData.id == _id){ // Vérifications du photographe grâce à son ID
                 photographerInfos.photographer = photographerData; //Récupération du photographe recherché
                 console.log(photographerData); // Affichage du photographe de la page actuelle 
+                this.media.forEach((media) => { //  Boucle forEach qui permet de naviguer dans l'array des medias du photographe
+                    if(media.photographerId == _id){ // Vérifications des medias grâce à l'ID du photographe
+                        this.likes += media.likes; // Somme de tout les likes du photographe
+                    }
+                });
+                console.log(this.likes); // Affichage de la somme des likes
+                
             }
-
         }) 
         photographerInfos.headerData(); // Appel de la fonction headerData() à partir des infos du photographe
+        photographerInfos.bottomRightContainer(); // Appel de la fonction bottomRightContainer() à partir des infos du photographe et de ses medias
     }   
 }
 //J'instencie le photographe dans la classe "thePhotographer"
@@ -31,33 +45,23 @@ const photographerInfos = new thePhotographer();
 photographerInfos.getPhotographer(); // Appel de la fonction getPhotographer pour récuperer le photographe
 
 photographerInfos.headerData = function (){// Function d'affichage du data du photographe
-    
-    const headerInfo = document.querySelector(".photograph-header .infoContainer"); // Je sélectionne le container des informations du photographe
+    photographerPage(this.photographer)   // Appel de la factory pour l'affichage des data du photographe
+}
 
-    const titlePhotograph = document.createElement("h1"); // Je crée un élément "h1"
-    titlePhotograph.textContent = this.photographer.name; // Je renseigne le nom du photographe dans le "h1"
-    console.log(titlePhotograph);
+photographerInfos.bottomRightContainer = function () { // Function de l'affichage du container fixé dans le coin de page en bas à droite
+    const mainSection = document.getElementById("main"); // Je sélectionne le main de la page du photographe
+    const bottomRightContainer = document.createElement("div"); // Je crée une DIV 
+    bottomRightContainer.classList.add("bottomRightContainer"); // J'ajoute la classe bottomRightContainer à la DIV
 
-    const locationPhotograph = document.createElement("h2"); // Je crée un élément "h2"
-    locationPhotograph.textContent = `${this.photographer.city}, ${this.photographer.country}`;  // J'assigne le texte de la ville et du pays du photographe
+    const likesSpan = document.createElement("span"); // Je crée un span  pour les likes totaux en bas de la page
+    likesSpan.classList.add("likes"); // J'ajoute la classe likes
+    likesSpan.innerHTML = `${this.likes} ♥`; // J'assigne le texte des likes 
+    const pricePerDaySpan = document.createElement("span"); // Je crée un span pour le prix par jour en bas de la page
+    pricePerDaySpan.classList.add("priceDay"); // J'ajoute la classe priceDay
+    pricePerDaySpan.innerHTML = `${this.photographer.price} $ / jour`; // J'assigne le texte du prix du photographe
 
-    const tagline = document.createElement("span");  // Je crée un élément span
-    tagline.textContent = this.photographer.tagline; // J'assigne le texte de la tagline au span
-    console.log(tagline);
+    bottomRightContainer.appendChild(likesSpan); // J'assigne le parent du span des likes au container du bas de page
+    bottomRightContainer.appendChild(pricePerDaySpan); // J'assigne le parent du prix par jour au container du bas de page
 
-    headerInfo.appendChild(titlePhotograph);  // J'assigne le parent du titre au container des infos du photographe
-    headerInfo.appendChild(locationPhotograph); // J'assigne le parent du localisation au container des infos du photographe
-    headerInfo.appendChild(tagline); // J'assigne le parent du tagline au container des infos du photographe
-
-    const headerPortrait = document.querySelector(".photograph-header .photoContainer"); // Je sélectionne le container du portrait du photographe
-
-    const portraitPhotograph = `assets/photographers/${this.photographer.portrait}`; // J'assgine l'URL du portrait
-    const imgPhotograph = document.createElement("img"); // Je crée un élément HTML img
-    imgPhotograph.setAttribute("src", portraitPhotograph); // J'ajoute en source l'URL du portrait
-    imgPhotograph.setAttribute("alt", " " /*`portrait of ${this.photographer.name}`*/); // Ajout du texte alternatif pour le portrait (accessibilité)
-
-    headerPortrait.appendChild(imgPhotograph); // J'assigne le parent de l'image du photographe au container de la photo
-
-
-   
+    mainSection.appendChild(bottomRightContainer) // J'assigne le parent du container du bas de page au main 
 }
