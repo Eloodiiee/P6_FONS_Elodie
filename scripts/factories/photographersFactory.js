@@ -43,7 +43,7 @@ export function articlePhotographer(data) {                             // Fonct
 
 export function photographerPage(data){
 
-    const { portrait, name, country, city, tagline, price, id } = data; // Compilations des données dans un objet
+    const { portrait, name, country, city, tagline } = data; // Compilations des données dans un objet
 
     const headerPhotograph = document.querySelector(".photograph-header"); // Je selectionne le header 
     
@@ -72,3 +72,47 @@ export function photographerPage(data){
     headerPortrait.appendChild(imgPhotograph); // J'assigne le parent de l'image du photographe au container de la photo
     return headerPhotograph // Retourne le header une fois qu'il est construit
 }
+
+export function displayMedia(data){
+    const { title, photographerId, video, image, likes } = data; // Compilations des données dans un objet
+
+    const mediaContainer = document.getElementById("mediaContainer"); // Je sélectionne le container des medias
+    const mediaBox = document.createElement("div"); // Je crée une DIV 
+    mediaBox.classList.add("mediaBox"); // J'assigne la classe mediaBox a la DIV 
+    const mediaImage = document.createElement("img"); // Je crée un élément HTML img
+    const mediaVideo = document.createElement("video"); // Je crée un élément HTML video
+    const mediaSubBox = document.createElement("div"); // Je crée une DIV 
+    mediaSubBox.classList.add("mediaSubBox"); // J'ajoute la classe mediaSubBox
+    const mediaTitle = document.createElement("span");  // Je créer le span de titre 
+    mediaTitle.classList.add("mediaTitle"); // J'ajoute la classe mediaTitle
+    const mediaLikes = document.createElement("span");  // Je créer le span de like
+    mediaLikes.classList.add("mediaLikes"); // J'ajoute la classe mediaLikes
+
+    if(video){ // je teste si le media est une video ou une image
+        const mediaUrl = `assets/medias/${photographerId}/${video}`; // J'assigne l'URL a une const
+        mediaVideo.setAttribute("src",mediaUrl); // J'assigne l'URL a la video
+        mediaVideo.setAttribute("alt",title); // J'assigne le alt 
+        mediaVideo.setAttribute("controls",true); //Attribut qui permet de jouer la video, de maniere provisoire tant qu'il n'y a pas la lightbox
+        mediaImage.classList.remove("mediaImage"); // J'enlève la classe mediaImage, pour éviter d'avoir les deux classes
+        mediaVideo.classList.add("mediaVideo"); // J'ajoute la classe mediaVideo
+        mediaBox.appendChild(mediaVideo); // J'assigne le parent de mediaBox sur mediaVideo
+    }
+    else{
+        const mediaUrl = `assets/medias/${photographerId}/${image}`;// J'assigne l'URL a une const
+        mediaImage.setAttribute("src",mediaUrl);// J'assigne l'URL a l'image
+        mediaImage.setAttribute("alt",title);// J'assigne le alt 
+        mediaVideo.classList.remove("mediaVideo");// J'enlève la classe mediaVideo, pour éviter d'avoir les deux classes
+        mediaImage.classList.add("mediaImage");// J'ajoute la classe mediaImage
+        mediaBox.appendChild(mediaImage);// J'assigne le parent de mediaBox sur mediaImage
+    }
+
+    mediaTitle.innerHTML = `${title}`; // Je rempli le contenu du titre
+    mediaLikes.innerHTML = `${likes} <i class="fa-solid fa-heart"></i>`; // Je rempli le contenu des likes
+    mediaBox.appendChild(mediaSubBox);// J'assigne le parent de mediaBox a mediaSubBox
+    mediaSubBox.appendChild(mediaTitle);// J'assigne le parent de mediaSubBox a mediaTitle
+    mediaSubBox.appendChild(mediaLikes);// J'assigne le parent de mediaSubBox a mediaLikes
+
+    mediaContainer.appendChild(mediaBox);// J'assigne le parent de mediaContainer a mediaBox
+
+}
+

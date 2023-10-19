@@ -1,4 +1,5 @@
 import { photographerPage } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des infos du photographe
+import { displayMedia } from "../factories/photographersFactory.js";
 
 // Je crée une classe qui va fetch les photographes en ne gardant que le photographe selectionné
 class thePhotographer { 
@@ -6,6 +7,7 @@ class thePhotographer {
         this.data = []; // initialisation du this.data grace au constructor
         this.photographer = null; //Initialisation du this.photographer grace au constructor
         this.media = []; // Initialisation du this.media grace au constructor
+        this.dataMedia = [] ; // Initialisation du this.dataMedia grace au constructor
         this.likes = 0; //  Initialisation du this.likes grace au constructor
     }
 
@@ -19,17 +21,20 @@ class thePhotographer {
         const res = await response.json(); 
         this.data = res.photographers; // Séparation du JSON pour ne garder que les photographes
         console.log(this.data); // Affichage du photographes
-        this.media = res.media; // Séparation du JSON pour ne garder que les medias
-        console.log(this.media); // Affichage de tout les medias
+        this.dataMedia = res.media; // Séparation du JSON pour ne garder que les medias
+        console.log(this.dataMedia); // Affichage de tout les medias
         
 
         this.data.forEach((photographerData) => { // Boucle forEach qui permet de naviguer dans l'array des photographes
             if(photographerData.id == _id){ // Vérifications du photographe grâce à son ID
                 photographerInfos.photographer = photographerData; //Récupération du photographe recherché
                 console.log(photographerData); // Affichage du photographe de la page actuelle 
-                this.media.forEach((media) => { //  Boucle forEach qui permet de naviguer dans l'array des medias du photographe
+                this.dataMedia.forEach((media) => { //  Boucle forEach qui permet de naviguer dans l'array des medias du photographe
                     if(media.photographerId == _id){ // Vérifications des medias grâce à l'ID du photographe
                         this.likes += media.likes; // Somme de tout les likes du photographe
+                        this.media = media; // Je récupère les informations des media
+                        console.log(this.media); // je les affiche en log
+                        photographerInfos.displayMedia(); // J'appele la function de la factory displayMedia
                     }
                 });
                 console.log(this.likes); // Affichage de la somme des likes
@@ -55,7 +60,7 @@ photographerInfos.bottomRightContainer = function () { // Function de l'affichag
 
     const likesSpan = document.createElement("span"); // Je crée un span  pour les likes totaux en bas de la page
     likesSpan.classList.add("likes"); // J'ajoute la classe likes
-    likesSpan.innerHTML = `${this.likes} ♥`; // J'assigne le texte des likes 
+    likesSpan.innerHTML = `${this.likes} <i class="fa-solid fa-heart"></i>`; // J'assigne le texte des likes 
     const pricePerDaySpan = document.createElement("span"); // Je crée un span pour le prix par jour en bas de la page
     pricePerDaySpan.classList.add("priceDay"); // J'ajoute la classe priceDay
     pricePerDaySpan.innerHTML = `${this.photographer.price} $ / jour`; // J'assigne le texte du prix du photographe
@@ -64,4 +69,7 @@ photographerInfos.bottomRightContainer = function () { // Function de l'affichag
     bottomRightContainer.appendChild(pricePerDaySpan); // J'assigne le parent du prix par jour au container du bas de page
 
     mainSection.appendChild(bottomRightContainer) // J'assigne le parent du container du bas de page au main 
+}
+photographerInfos.displayMedia = function () { // Function d'affichage des medias
+   displayMedia(this.media);// Appel de la factory pour l'affichage des medias
 }

@@ -10,6 +10,43 @@
     height: 300px;
     margin: 0 100px;
 }
+#mediaContainer{
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.mediaBox{
+    margin: 100px 40px 20px 40px;
+    height: 350px;
+    width: 350px;
+   
+}
+.mediaImage,
+.mediaVideo{
+    height: 300px;
+    width: 350px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer
+}
+.mediaSubBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+.mediaTitle,
+.mediaLikes{
+    font-size: 1.2em;
+}
+.mediaTitle{
+    color: #901C1C;
+    font-weight: 500;
+}
+.mediaLikes{
+    color: #901C1C;
+    font-weight: bold;
+}
 .bottomRightContainer{
     display: flex;
     position: fixed;
