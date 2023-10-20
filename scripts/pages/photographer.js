@@ -81,15 +81,23 @@ photographerInfos.updateLikes = function () {
     likeBtn.forEach((like) => {
         like.addEventListener("click", () => {
             if(liked == false){
-
-            like.classList.remove("fa-regular");
-            like.classList.add("fa-solid");
-            liked = true;
+                like.classList.remove("fa-regular");
+                like.classList.add("fa-solid");
+                liked = true;
+                this.likes = this.likes+1;
+                this.media.likes = this.media.likes+1;
+                console.log(this.likes);
+                console.log(this.media.likes);
             }
-
-            like.classList.remove("fa-solid");
-            like.classList.add("fa-regular");
-            liked = false;
+            else{
+                like.classList.remove("fa-solid");
+                like.classList.add("fa-regular");
+                liked = false;
+                this.likes = this.likes-1;
+                this.media.likes = this.media.likes-1;
+                console.log(this.likes);
+                console.log(this.media.likes);
+            }
         })
             console.log("click");   
     }) 
