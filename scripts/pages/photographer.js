@@ -43,6 +43,7 @@ class thePhotographer {
         }) 
         photographerInfos.headerData(); // Appel de la fonction headerData() à partir des infos du photographe
         photographerInfos.bottomRightContainer(); // Appel de la fonction bottomRightContainer() à partir des infos du photographe et de ses medias (like bas de page)
+        photographerInfos.updateLikes();
     }   
 }
 //J'instencie le photographe dans la classe "thePhotographer"
@@ -72,4 +73,24 @@ photographerInfos.bottomRightContainer = function () { // Function de l'affichag
 }
 photographerInfos.displayMedia = function () { // Function d'affichage des medias
    displayMedia(this.media);// Appel de la factory pour l'affichage des medias
+}
+photographerInfos.updateLikes = function () {
+    const likeBtn = document.querySelectorAll(".clickable");
+    let liked = false;
+    console.log(likeBtn);
+    likeBtn.forEach((like) => {
+        like.addEventListener("click", () => {
+            if(liked == false){
+
+            like.classList.remove("fa-regular");
+            like.classList.add("fa-solid");
+            liked = true;
+            }
+
+            like.classList.remove("fa-solid");
+            like.classList.add("fa-regular");
+            liked = false;
+        })
+            console.log("click");   
+    }) 
 }

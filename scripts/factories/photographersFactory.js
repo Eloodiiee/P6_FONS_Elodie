@@ -107,7 +107,7 @@ export function displayMedia(data){
     }
 
     mediaTitle.innerHTML = `${title}`; // Je rempli le contenu du titre
-    mediaLikes.innerHTML = `${likes} <i class="fa-solid fa-heart"></i>`; // Je rempli le contenu des likes
+    mediaLikes.innerHTML = `${likes} <i class="fa-regular fa-heart clickable"></i>`; // Je rempli le contenu des likes
     mediaBox.appendChild(mediaSubBox);// J'assigne le parent de mediaBox a mediaSubBox
     mediaSubBox.appendChild(mediaTitle);// J'assigne le parent de mediaSubBox a mediaTitle
     mediaSubBox.appendChild(mediaLikes);// J'assigne le parent de mediaSubBox a mediaLikes
