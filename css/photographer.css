@@ -78,9 +78,17 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    
+}
+.contact_button:hover, 
+.contact_button:focus {
+    background-color: #DB8876;
 }
 
 .modal {
+    position: absolute;
+    top: 50%;
+    right: 25%;
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;

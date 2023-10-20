@@ -1,5 +1,5 @@
 import { photographerPage } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des infos du photographe
-import { displayMedia } from "../factories/photographersFactory.js";
+import { displayMedia } from "../factories/photographersFactory.js";  // Importation de la factory pour l'affichage des medias
 
 // Je crée une classe qui va fetch les photographes en ne gardant que le photographe selectionné
 class thePhotographer { 
@@ -42,7 +42,7 @@ class thePhotographer {
             }
         }) 
         photographerInfos.headerData(); // Appel de la fonction headerData() à partir des infos du photographe
-        photographerInfos.bottomRightContainer(); // Appel de la fonction bottomRightContainer() à partir des infos du photographe et de ses medias
+        photographerInfos.bottomRightContainer(); // Appel de la fonction bottomRightContainer() à partir des infos du photographe et de ses medias (like bas de page)
     }   
 }
 //J'instencie le photographe dans la classe "thePhotographer"
