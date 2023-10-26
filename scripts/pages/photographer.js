@@ -1,5 +1,7 @@
 import { photographerPage } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des infos du photographe
 import { displayMedia } from "../factories/photographersFactory.js";
+import { contactForm } from "../utils/formularRegister.js";
+
 // Je crée une classe qui va fetch les photographes en ne gardant que le photographe selectionné
 class thePhotographer { 
     constructor() {
@@ -8,8 +10,16 @@ class thePhotographer {
         this.dataMedia = [] ; // Initialisation du this.dataMedia grace au constructor
         this.media = []; // Initialisation du this.media grace au constructor
         this.likes = 0; //  Initialisation du this.likes grace au constructor
+        this.eInit();
     }
-
+    eInit() {
+        const formModal = document.getElementById("modalRegistering")
+        formModal.addEventListener("click", (e) => {
+          e.preventDefault();
+          contactForm(this);
+          
+        });
+    }
 
     //Fonction asynchrone de fetch et de tri des photographes
     async getPhotographer() {
@@ -40,9 +50,8 @@ class thePhotographer {
             }
         }) 
         photographerInfos.headerData(); // Appel de la fonction headerData() à partir des infos du photographe
-        photographerInfos.displayMedia();// Appel de la function displayMedia(), à partir de la fatory
-        photographerInfos.bottomRightContainer(); // Appel de la fonction bottomRightContainer() à partir des infos du photographe et de ses medias
-        photographerInfos.updateLikes();// Appel de la function updateLikes()
+        photographerInfos.sortMedia();//
+        photographerInfos.mainFunctions();//
     }   
 }
 //J'instencie le photographe dans la classe "thePhotographer"
@@ -51,6 +60,11 @@ photographerInfos.getPhotographer(); // Appel de la fonction getPhotographer pou
 
 photographerInfos.headerData = function (){// Function d'affichage du data du photographe
     photographerPage(this.photographer)   // Appel de la factory pour l'affichage des data du photographe
+}
+photographerInfos.mainFunctions = function () {
+    photographerInfos.displayMedia();
+    photographerInfos.bottomRightContainer();
+    photographerInfos.updateLikes();
 }
 
 photographerInfos.bottomRightContainer = function () { // Function de l'affichage du container fixé dans le coin de page en bas à droite
@@ -77,7 +91,30 @@ photographerInfos.bottomRightContainer = function () { // Function de l'affichag
 
     mainSection.appendChild(bottomRightContainer) // J'assigne le parent du container du bas de page au main 
 }
-
+photographerInfos.sortMedia = function () {
+    const mediaContainer = document.getElementById("mediaContainer");
+    const sortMenu = document.getElementById("filter");
+    this.media.sort((a, b) => b.likes - a.likes)
+    sortMenu.addEventListener(("change"), () => {
+        console.log(sortMenu.options[sortMenu.selectedIndex].text);
+        if (sortMenu.options[sortMenu.selectedIndex].text == "Popularité") {
+            this.media.sort((a, b) => b.likes - a.likes)
+            mediaContainer.innerHTML = "";
+            photographerInfos.mainFunctions();
+           
+        }
+        if (sortMenu.options[sortMenu.selectedIndex].text == "Date") {
+            this.media.sort((a, b) => new Date(b.date) - new Date(a.date))
+            mediaContainer.innerHTML = "";
+            photographerInfos.mainFunctions();
+        }
+        if (sortMenu.options[sortMenu.selectedIndex].text == "Titre") {
+            this.media.sort((a, b) => a.title.localeCompare(b.title))
+            mediaContainer.innerHTML = "";
+            photographerInfos.mainFunctions();
+        }
+    })
+}
 photographerInfos.displayMedia = function () { // Appel de la fonction displayMedia 
     displayMedia(this.media) // Appel de la fatory displayMedia
 }

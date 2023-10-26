@@ -16,10 +16,18 @@
       <div class="photograph-header">
         <div class="infoContainer"></div>
         <div class="btnContainer">
-          <button class="contact_button" name="Contact Me" onclick="displayModal()">Contactez-moi</button>
+          <button id="modalRegistering" class="contact_button" name="Contact Me" onclick="displayModal()">Contactez-moi</button>
         </div>
         <div class="photoContainer"></div>
       </div>
+      <div class="filterMenu">
+        <label for="filter">Filtrer par :</label>
+        <select name="filter" id="filter">
+          <option id="popular" value="likes">Popularité</option>
+          <option id="date" value="date">Date</option>
+          <option id="title" value="title">Titre</option>
+        </select>
+      </div> 
       <div id="mediaContainer"></div>
     </main>
     <div id="contact_modal">
@@ -28,7 +36,7 @@
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" alt="Bouton de Fermeture du formulaire"/>
         </header>
-				<form>
+				<form id="contactForm" action="" method="post">
 					<div class="formData">
 						<label for="first">Prénom</label><br>
             <input class="text-control" type="text" id="first" name="first"/><br>
