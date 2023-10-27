@@ -17,7 +17,6 @@ class thePhotographer {
         formModal.addEventListener("click", (e) => { // au click du h2 
           e.preventDefault(); 
           contactForm(this); // Exécute la function contactForm sur le formulaire
-          
         });
     }
 
@@ -50,8 +49,8 @@ class thePhotographer {
             }
         }) 
         photographerInfos.headerData(); // Appel de la fonction headerData() à partir des infos du photographe
-        photographerInfos.sortMedia();//
-        photographerInfos.mainFunctions();//
+        photographerInfos.sortMedia(); // Appel de la fonction sortMedia() pour trier les medias
+        photographerInfos.mainFunctions(); // Appel de la fonction mainFunctions() pour l'affichage du reste de la page
     }   
 }
 //J'instencie le photographe dans la classe "thePhotographer"
