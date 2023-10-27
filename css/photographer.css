@@ -8,7 +8,7 @@
     align-items: center;
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    margin: 42px 100px;
 }
 #mediaContainer{
     display: flex ;
@@ -84,7 +84,8 @@
 }
 .contact_button:hover, 
 .contact_button:focus {
-    background-color: #DB8876;
+    background-color: #d3573c;
+    color: black;
 }
 
 .modal {
@@ -142,4 +143,19 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+#filter{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 160px;
+    height: 60px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.filterMenu{
+    margin: 0px 0px 0px 70px;
 }
