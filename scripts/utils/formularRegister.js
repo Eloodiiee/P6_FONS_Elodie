@@ -112,12 +112,10 @@ export function contactForm() { // J'exporte la fonction contactForm
     else {
         return
     }
-
-
+    contactButton.reset();
+    firstNameInput.style.border = "none";
+    lastNameInput.style.border = "none";
+    emailInput.style.border = "none";
+    messageInput.style.border = "none";
   });
-
-    //contactButton.reset();
-
-  //document.getElementById("contactForm").reset();
-
 }
