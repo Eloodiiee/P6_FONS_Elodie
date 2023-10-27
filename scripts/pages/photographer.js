@@ -1,6 +1,6 @@
 import { photographerPage } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des infos du photographe
-import { displayMedia } from "../factories/photographersFactory.js";
-import { contactForm } from "../utils/formularRegister.js";
+import { displayMedia } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des medias
+import { contactForm } from "../utils/formularRegister.js"; // Importation de l'utils pour le fonctionnement du formulaire
 
 // Je crée une classe qui va fetch les photographes en ne gardant que le photographe selectionné
 class thePhotographer { 
@@ -10,13 +10,13 @@ class thePhotographer {
         this.dataMedia = [] ; // Initialisation du this.dataMedia grace au constructor
         this.media = []; // Initialisation du this.media grace au constructor
         this.likes = 0; //  Initialisation du this.likes grace au constructor
-        this.eInit();
+        this.eInit(); // Initialisation du this.enit grace au constructor
     }
-    eInit() {
-        const formModal = document.getElementById("modalRegistering")
-        formModal.addEventListener("click", (e) => {
-          e.preventDefault();
-          contactForm(this);
+    eInit() { // Function d'initialisation du fonctionnement du formulaire
+        const formModal = document.getElementById("modalRegistering") // Je sélectionne le h2 contactez-moi 
+        formModal.addEventListener("click", (e) => { // au click du h2 
+          e.preventDefault(); 
+          contactForm(this); // Exécute la function contactForm sur le formulaire
           
         });
     }
@@ -61,10 +61,10 @@ photographerInfos.getPhotographer(); // Appel de la fonction getPhotographer pou
 photographerInfos.headerData = function (){// Function d'affichage du data du photographe
     photographerPage(this.photographer)   // Appel de la factory pour l'affichage des data du photographe
 }
-photographerInfos.mainFunctions = function () {
-    photographerInfos.displayMedia();
-    photographerInfos.bottomRightContainer();
-    photographerInfos.updateLikes();
+photographerInfos.mainFunctions = function () { // Function d'affichage principale qui permet d'appeler plusieurs function à la fois
+    photographerInfos.displayMedia(); // Function d'affichage des medias
+    photographerInfos.bottomRightContainer(); //  Function d'affichage du container en bas à droite des likes
+    photographerInfos.updateLikes(); // Function de mise à jour des likes
 }
 
 photographerInfos.bottomRightContainer = function () { // Function de l'affichage du container fixé dans le coin de page en bas à droite
@@ -91,27 +91,27 @@ photographerInfos.bottomRightContainer = function () { // Function de l'affichag
 
     mainSection.appendChild(bottomRightContainer) // J'assigne le parent du container du bas de page au main 
 }
-photographerInfos.sortMedia = function () {
-    const mediaContainer = document.getElementById("mediaContainer");
-    const sortMenu = document.getElementById("filter");
-    this.media.sort((a, b) => b.likes - a.likes)
-    sortMenu.addEventListener(("change"), () => {
-        console.log(sortMenu.options[sortMenu.selectedIndex].text);
-        if (sortMenu.options[sortMenu.selectedIndex].text == "Popularité") {
-            this.media.sort((a, b) => b.likes - a.likes)
-            mediaContainer.innerHTML = "";
-            photographerInfos.mainFunctions();
+photographerInfos.sortMedia = function () { // function de tri des media par filtre
+    const mediaContainer = document.getElementById("mediaContainer"); // Je selectionne le container des medias
+    const sortMenu = document.getElementById("filter"); // Je selectionne le menu déroulant des filtres
+    this.media.sort((a, b) => b.likes - a.likes) // Par défaut les medias sont rangés par popularité
+    sortMenu.addEventListener(("change"), () => { // Détecte si le filtre est changé
+        console.log(sortMenu.options[sortMenu.selectedIndex].text); 
+        if (sortMenu.options[sortMenu.selectedIndex].text == "Popularité") { //Si c'est sur popularité alors ça va les ranger comme par defaut via les likes
+            this.media.sort((a, b) => b.likes - a.likes) // Function de tri avec les likes
+            mediaContainer.innerHTML = ""; // Clean du mediacontainer
+            photographerInfos.mainFunctions(); // Appel à nouveau des function d'affichage principales 
            
         }
-        if (sortMenu.options[sortMenu.selectedIndex].text == "Date") {
-            this.media.sort((a, b) => new Date(b.date) - new Date(a.date))
-            mediaContainer.innerHTML = "";
-            photographerInfos.mainFunctions();
+        if (sortMenu.options[sortMenu.selectedIndex].text == "Date") { // Si c'est sur la date alors ça va les ranger via les dates
+            this.media.sort((a, b) => new Date(b.date) - new Date(a.date)) // Function de tri avec les dates
+            mediaContainer.innerHTML = ""; //  Clean du mediacontainer
+            photographerInfos.mainFunctions(); // Appel à nouveau des function d'affichage principales 
         }
-        if (sortMenu.options[sortMenu.selectedIndex].text == "Titre") {
-            this.media.sort((a, b) => a.title.localeCompare(b.title))
-            mediaContainer.innerHTML = "";
-            photographerInfos.mainFunctions();
+        if (sortMenu.options[sortMenu.selectedIndex].text == "Titre") { // si c'est sur le titre alors ça va les ranger par titre
+            this.media.sort((a, b) => a.title.localeCompare(b.title)) // Function de tri avec les titres
+            mediaContainer.innerHTML = ""; // Clean du mediacontainer
+            photographerInfos.mainFunctions(); // Appel à nouveau des function d'affichage principales 
         }
     })
 }

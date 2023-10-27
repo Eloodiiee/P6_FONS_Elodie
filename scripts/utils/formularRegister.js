@@ -1,20 +1,19 @@
-export function contactForm() {
+export function contactForm() { // J'exporte la fonction contactForm
     //Elements du formulaire
 
     const firstNameInput = document.getElementById("first"); //Prénom
     const lastNameInput = document.getElementById("last"); //Nom
     const emailInput = document.getElementById("email"); //Email
-    const messageInput = document.getElementById("message");
+    const messageInput = document.getElementById("message"); // Message 
     const contactButton = document.getElementById("contactForm"); //Bouton de validation du formulaire
-    const closeConfirm = document.getElementsByClassName('btn-close');//Bouton du modal de confirmation (du bouton rouge "fermer" )
-    const regexNames = /^[A-Za-zÀ-ÖØ-öø-ÿ]+((\s)?((\'|\-|\.)?([A-Za-zÀ-ÖØ-öø-ÿ])+))*$/
-    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    const regexNames = /^[A-Za-zÀ-ÖØ-öø-ÿ]+((\s)?((\'|\-|\.)?([A-Za-zÀ-ÖØ-öø-ÿ])+))*$/ // Regex du nom et du prenom
+    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ // Regex de l'email
 
     console.log("Enregistrement des données");
 
-    //Variables booléennes
+    //Variables booléennes pour savoir si les champs sont bien remplis 
 
-    let firstChecked = false;
+    let firstChecked = false; 
     let lastChecked = false;
     let emailChecked = false;
     let messageChecked = false;
@@ -26,21 +25,21 @@ export function contactForm() {
     let messageErrorMsg = document.getElementById('messageErrorMsg');
   
   
-    //Execution des entrées du formulaire //Fonctions de vérification des entrées du formulaire
+    //Ajout d'un événement pour chaque champ du formulaire en fonction de s'il est bien rempli ou non 
     firstNameInput.addEventListener("input", (e) => {
       e.preventDefault();
       const firstNameT = firstNameInput.value;
       let fnameChecked = regexNames.test(firstNameT);
       if (fnameChecked == true && firstNameT.length >= 2) {
         firstNameErrorMess.textContent = ("");
-        firstNameInput.style.border = "thick solid green";  // Ajoute une bordure rouge si faux, si vrai c'est vert
+        firstNameInput.style.border = "thick solid green";  // Ajoute une bordure verte si c'est vrai
         firstChecked = true;
       }
       else {
         firstNameErrorMess.style.color = "red";
         firstNameErrorMess.style.fontSize ="0.6em"
         firstNameErrorMess.textContent = (`Le champ "Prénom" renseigné n'est pas valide !`);
-        firstNameInput.style.border = "thick solid red"; 
+        firstNameInput.style.border = "thick solid red"; // Ajoute une bordure rouge si c'est faux
         firstChecked = false; 
       };
     });
@@ -94,7 +93,7 @@ export function contactForm() {
         messageChecked = false; 
       };
     });
-  //A l'appuie du bouton "c'est parti", actionne la fonction validate
+  //A l'appuie du bouton "envoyer", actionne la fonction validate
   contactButton.addEventListener("submit", (e) => {
     e.preventDefault();
     //Si tout les champs sont correctemment remplis, le formulaire s'enregistre et passe au modal suivant
