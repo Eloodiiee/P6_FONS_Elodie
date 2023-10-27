@@ -155,6 +155,7 @@ form input {
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    margin: -4px 27px;
 }
 .filterMenu{
     margin: 0px 0px 0px 70px;
