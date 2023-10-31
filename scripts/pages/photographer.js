@@ -124,17 +124,15 @@ photographerInfos.updateLikes = function () { // Appel de la fonction updateLike
     const likeValue = document.getElementsByClassName("likeValue"); // Je selectionne la valeur des coeurs des medias 
     for(let i = 0; i < likeBtn.length; i++){ // J'assigne un chiffre selecteur pour les boutons like à l'aide de la boucle for
         likeBtn[i].addEventListener("click", () => { // J'assigne un événement au click du bouton like
-            if(likeBtn[i].classList.contains("liked") === false){ // Si le bouton like ne contient pas la classe liked, alors 
+            if(likeBtn[i].classList.contains("fa-regular") === true){ // Si le bouton like ne contient pas la classe liked, alors 
                 likeBtn[i].classList.remove("fa-regular"); // je retire la classe "fa-regular"
                 likeBtn[i].classList.add("fa-solid"); // j'ajoute la classe "fa-solid"
-                likeBtn[i].classList.add("liked"); // J'ajoute la classe liked
                 this.media[i].likes++; // J'ajoute un like sur le media concerné
                 this.likes++; // J'ajoute un like sur le total de like
                 console.log("Liké ! ", this.media[i].likes); // console log pour montrer que ça a liké
             }
-            else  if(likeBtn[i].classList.contains("liked") === true){ // Si le bouton like  contient  la classe liked, alors
+            else  if(likeBtn[i].classList.contains("fa-solid") === true){ // Si le bouton like  contient  la classe liked, alors
                 likeBtn[i].classList.remove("fa-solid"); // je retire la classe "fa-solid"
-                likeBtn[i].classList.remove("liked"); // J'enleve la classe liked
                 likeBtn[i].classList.add("fa-regular"); // j'ajoute la classe "fa-regular"
                 this.media[i].likes--; // Je retire un like sur le media concerné
                 this.likes--; // Je retire un like sur le total de like
