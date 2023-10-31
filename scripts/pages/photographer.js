@@ -25,7 +25,7 @@ class thePhotographer {
         const currentUrl = (new URL(document.location)).searchParams ; // Permet de récupérer les informations dans l'URL
         const _id = currentUrl.get('id'); // Récupération de l'ID dans l'URL
         console.log("Photographer ID : ", _id); // Affichage de l'ID grâce a l'URL
-        const response = await fetch(`/data/photographers.json`)  
+        const response = await fetch(`./data/photographers.json`)  ////////////////////////////////////////////////////
         const res = await response.json(); 
         this.data = res.photographers; // Séparation du JSON pour ne garder que les photographes
         console.log("Photographers Array : ", this.data); // Affichage du photographes
@@ -131,21 +131,18 @@ photographerInfos.updateLikes = function () { // Appel de la fonction updateLike
                 this.media[i].likes++; // J'ajoute un like sur le media concerné
                 this.likes++; // J'ajoute un like sur le total de like
                 console.log("Liké ! ", this.media[i].likes); // console log pour montrer que ça a liké
-                likeValue[i].innerHTML = `${this.media[i].likes} `; // J'affiche le like du media concerné
-                likeBottomRight.innerHTML = `${this.likes} `; // J'affiche le total des likes des medias en bas de la page
             }
-        })
-        likeBtn[i].addEventListener("dblclick", () =>{ //// J'assigne un événement au double click du bouton like
-            if(likeBtn[i].classList.contains("liked") === true){ // Si le bouton like  contient  la classe liked, alors
+            else  if(likeBtn[i].classList.contains("liked") === true){ // Si le bouton like  contient  la classe liked, alors
                 likeBtn[i].classList.remove("fa-solid"); // je retire la classe "fa-solid"
                 likeBtn[i].classList.remove("liked"); // J'enleve la classe liked
                 likeBtn[i].classList.add("fa-regular"); // j'ajoute la classe "fa-regular"
                 this.media[i].likes--; // Je retire un like sur le media concerné
                 this.likes--; // Je retire un like sur le total de like
                 console.log("Like enlevé ! ", this.media[i].likes); // console log pour montrer que ça a enlevé le like
-                likeValue[i].innerHTML = `${this.media[i].likes} `; // J'affiche le like du media concerné
-                likeBottomRight.innerHTML = `${this.likes} `; //  J'affiche le total des likes des medias en bas de la page
+                
             }
+            likeValue[i].innerHTML = `${this.media[i].likes} `; // J'affiche le like du media concerné
+                likeBottomRight.innerHTML = `${this.likes} `; //  J'affiche le total des likes des medias en bas de la page
         })
     }
 }
