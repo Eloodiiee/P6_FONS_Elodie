@@ -1,3 +1,8 @@
+export function contactName(data){
+  const {name} = data;
+  const photographerNameHeader = document.getElementById("photographerName");
+  photographerNameHeader.innerHTML = `${name}`;
+}
 export function contactForm() { // J'exporte la fonction contactForm
     //Elements du formulaire
 

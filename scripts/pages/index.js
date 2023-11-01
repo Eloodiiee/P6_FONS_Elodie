@@ -10,7 +10,7 @@ class photographers {
  
     //Fonction asynchrone de fetch et appel de la fonction d'affichage des données
     async getPhotographers() {
-        const response = await fetch("../../data/photographers.json"); ///////////////
+        const response = await fetch("./data/photographers.json"); ///////////////
         const res = await response.json();
         this.data = res.photographers; // Séparation du JSON pour ne garder que les photographes
         console.log(this.data);

@@ -1,6 +1,7 @@
 import { photographerPage } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des infos du photographe
 import { displayMedia } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des medias
 import { contactForm } from "../utils/formularRegister.js"; // Importation de l'utils pour le fonctionnement du formulaire
+import { contactName } from "../utils/formularRegister.js";
 
 // Je crée une classe qui va fetch les photographes en ne gardant que le photographe selectionné
 class thePhotographer { 
@@ -25,7 +26,7 @@ class thePhotographer {
         const currentUrl = (new URL(document.location)).searchParams ; // Permet de récupérer les informations dans l'URL
         const _id = currentUrl.get('id'); // Récupération de l'ID dans l'URL
         console.log("Photographer ID : ", _id); // Affichage de l'ID grâce a l'URL
-        const response = await fetch(`../../data/photographers.json`)  ////////////////////////////////////////////////////
+        const response = await fetch(`./data/photographers.json`)  ////////////////////////////////////////////////////
         const res = await response.json(); 
         this.data = res.photographers; // Séparation du JSON pour ne garder que les photographes
         console.log("Photographers Array : ", this.data); // Affichage du photographes
@@ -51,6 +52,7 @@ class thePhotographer {
         photographerInfos.headerData(); // Appel de la fonction headerData() à partir des infos du photographe
         photographerInfos.sortMedia(); // Appel de la fonction sortMedia() pour trier les medias
         photographerInfos.mainFunctions(); // Appel de la fonction mainFunctions() pour l'affichage du reste de la page
+        photographerInfos.contactName();// 
     }   
 }
 //J'instencie le photographe dans la classe "thePhotographer"
@@ -90,34 +92,45 @@ photographerInfos.bottomRightContainer = function () { // Function de l'affichag
 
     mainSection.appendChild(bottomRightContainer) // J'assigne le parent du container du bas de page au main 
 }
-photographerInfos.sortMedia = function () { // function de tri des media par filtre
-    const mediaContainer = document.getElementById("mediaContainer"); // Je selectionne le container des medias
-    const sortMenu = document.getElementById("filter"); // Je selectionne le menu déroulant des filtres
+photographerInfos.sortMedia = function () { // function de tri des medias par filtre
+    const mediaContainer = document.getElementById("mediaContainer"); // Je selectionne le container des media
     this.media.sort((a, b) => b.likes - a.likes) // Par défaut les medias sont rangés par popularité
-    sortMenu.addEventListener(("change"), () => { // Détecte si le filtre est changé
-        console.log(sortMenu.options[sortMenu.selectedIndex].text); 
-        if (sortMenu.options[sortMenu.selectedIndex].text == "Popularité") { //Si c'est sur popularité alors ça va les ranger comme par defaut via les likes
-            this.media.sort((a, b) => b.likes - a.likes) // Function de tri avec les likes
+    const selectedBox = document.querySelector(".selectedBox"); //Je selectionne le texte dans le container filtre
+    const chevronCursor = document.querySelector(".fa-chevron-down"); // Je selectionne le cheveron a coté du texte
+    const filters = document.querySelector(".filters"); // Je selectionne la liste des filtres 
+    const options = document.querySelectorAll(".filters li"); // Je selectionne les options de filtres
+    const selected = document.querySelector(".selected"); // Je selectionne le filtre selectionné
+    selectedBox.addEventListener("click", () =>{ // L'évenement au click sur le container des filtres
+        chevronCursor.classList.toggle("chevron-rotate"); // Active l'animation de rotation du cheveron
+        filters.classList.toggle("filters-open"); // Ouvre le menu des filtres
+    });
+    options.forEach(option => { // Boucle forEach pour parcourir les options de filtre
+        option.addEventListener("click", () => { // L'évenement au click sur l'un des filtres
+            selected.innerText = option.innerText; // Remplace le texte du container de filtre par le nouveau filtre
+            chevronCursor.classList.remove("chevron-rotate"); // Remet le cheveron dans sa position originale
+            filters.classList.remove("filters-open"); // Ferme le menu des filtres
+            options.forEach(option => { // Boucle forEach qui permet de retirer la classe active du filtre qui était actif
+                option.classList.remove("active");
+            });
+            option.classList.add("active"); // Ajoute la classe active au filtre selectionné
+            console.log(selected.innerText); 
+            if(selected.innerText == "Popularité"){ // Si le texte dans le container de filtre est "popularité", alors ça va les ranger comme par defaut via les likes
+                this.media.sort((a, b) => b.likes - a.likes) // Function de tri avec les likes
+            }
+            if(selected.innerText == "Date"){ // Si c'est sur la date alors ça va les ranger via les dates
+                this.media.sort((a, b) => new Date(b.date) - new Date(a.date)) // Function de tri avec les dates
+            }
+            if(selected.innerText == "Titre"){ // si c'est sur le titre alors ça va les ranger par titre
+                this.media.sort((a, b) => a.title.localeCompare(b.title)) // Function de tri avec les titres
+            }
             mediaContainer.innerHTML = ""; // Clean du mediacontainer
             photographerInfos.mainFunctions(); // Appel à nouveau des function d'affichage principales 
-           
-        }
-        if (sortMenu.options[sortMenu.selectedIndex].text == "Date") { // Si c'est sur la date alors ça va les ranger via les dates
-            this.media.sort((a, b) => new Date(b.date) - new Date(a.date)) // Function de tri avec les dates
-            mediaContainer.innerHTML = ""; //  Clean du mediacontainer
-            photographerInfos.mainFunctions(); // Appel à nouveau des function d'affichage principales 
-        }
-        if (sortMenu.options[sortMenu.selectedIndex].text == "Titre") { // si c'est sur le titre alors ça va les ranger par titre
-            this.media.sort((a, b) => a.title.localeCompare(b.title)) // Function de tri avec les titres
-            mediaContainer.innerHTML = ""; // Clean du mediacontainer
-            photographerInfos.mainFunctions(); // Appel à nouveau des function d'affichage principales 
-        }
-    })
+        });
+    });
 }
 photographerInfos.displayMedia = function () { // Appel de la fonction displayMedia 
     displayMedia(this.media) // Appel de la fatory displayMedia
 }
-
 photographerInfos.updateLikes = function () { // Appel de la fonction updateLikes 
     const likeBtn = document.querySelectorAll(".likeBtn"); // Je selectionne les boutons des coeurs pour les likes
     const likeBottomRight = document.querySelector(".likesSpanValue"); // Je selectionne la valeur des likes totaux en bas a droite 
@@ -143,4 +156,7 @@ photographerInfos.updateLikes = function () { // Appel de la fonction updateLike
                 likeBottomRight.innerHTML = `${this.likes} `; //  J'affiche le total des likes des medias en bas de la page
         })
     }
+}
+photographerInfos.contactName = function (){
+    contactName(this.photographer);
 }

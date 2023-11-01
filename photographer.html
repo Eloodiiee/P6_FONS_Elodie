@@ -20,20 +20,29 @@
         </div>
         <div class="photoContainer"></div>
       </div>
-      <div class="filterMenu">
-        <label for="filter">Filtrer par :</label>
-        <select name="filter" id="filter">
-          <option id="popular" value="likes">Popularité</option>
-          <option id="date" value="date">Date</option>
-          <option id="title" value="title">Titre</option>
-        </select>
-      </div> 
+      <div class="filtersDropdown">
+        <div class="filtersFlex">
+          <label for="filter" class="filterLabel">Trier par</label>
+          <div class="selectedBox">
+            <span class="selected" value="likes">Popularité</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <ul class="filters">
+          <li value="likes" class="active" id="popular">Popularité</li>
+          <li value="date" id="date">Date</li>
+          <li value="title" id="title">Titre</li>
+        </ul>
+      </div>
       <div id="mediaContainer"></div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi</h2>
+          <div class="headerModal">
+            <h2>Contactez-moi</h2>
+            <h2 id="photographerName"></h2>
+          </div>
           <img src="assets/icons/close.svg" onclick="closeModal()" alt="Bouton de Fermeture du formulaire"/>
         </header>
 				<form id="contactForm" action="" method="post">
