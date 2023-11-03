@@ -3,25 +3,21 @@ export function contactName(data){
   const photographerNameHeader = document.getElementById("photographerName");
   photographerNameHeader.innerHTML = `${name}`;
 }
-export function contactForm() { // J'exporte la fonction contactForm
+
+export function contactForm() {
+
     //Elements du formulaire
 
     const firstNameInput = document.getElementById("first"); //Prénom
     const lastNameInput = document.getElementById("last"); //Nom
     const emailInput = document.getElementById("email"); //Email
-    const messageInput = document.getElementById("message"); // Message 
+    const messageInput = document.getElementById("message");
     const contactButton = document.getElementById("contactForm"); //Bouton de validation du formulaire
-    const regexNames = /^[A-Za-zÀ-ÖØ-öø-ÿ]+((\s)?((\'|\-|\.)?([A-Za-zÀ-ÖØ-öø-ÿ])+))*$/ // Regex du nom et du prenom
-    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ // Regex de l'email
-
+    const regexNames = /^[A-Za-zÀ-ÖØ-öø-ÿ]+((\s)?((\'|\-|\.)?([A-Za-zÀ-ÖØ-öø-ÿ])+))*$/
+    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    const errorMsgFontSize = "1em";
+    
     console.log("Enregistrement des données");
-
-    //Variables booléennes pour savoir si les champs sont bien remplis 
-
-    let firstChecked = false; 
-    let lastChecked = false;
-    let emailChecked = false;
-    let messageChecked = false;
 
     //Messages d'erreurs du formulaire
     let firstNameErrorMess = document.getElementById('firstNameErrorMsg');
@@ -29,98 +25,136 @@ export function contactForm() { // J'exporte la fonction contactForm
     let emailErrorMess = document.getElementById('emailErrorMsg');
     let messageErrorMsg = document.getElementById('messageErrorMsg');
   
-  
-    //Ajout d'un événement pour chaque champ du formulaire en fonction de s'il est bien rempli ou non 
-    firstNameInput.addEventListener("input", (e) => {
-      e.preventDefault();
+    // Functions de regex du formulaire
+    contactForm.firstNameCheck = function (){ 
       const firstNameT = firstNameInput.value;
       let fnameChecked = regexNames.test(firstNameT);
       if (fnameChecked == true && firstNameT.length >= 2) {
         firstNameErrorMess.textContent = ("");
-        firstNameInput.style.border = "thick solid green";  // Ajoute une bordure verte si c'est vrai
-        firstChecked = true;
+        firstNameInput.style.border = "thick solid green";  // Ajoute une bordure rouge si faux, si vrai c'est vert
+        return true
       }
       else {
         firstNameErrorMess.style.color = "red";
-        firstNameErrorMess.style.fontSize ="0.6em"
+        firstNameErrorMess.style.fontSize = errorMsgFontSize;
         firstNameErrorMess.textContent = (`Le champ "Prénom" renseigné n'est pas valide !`);
-        firstNameInput.style.border = "thick solid red"; // Ajoute une bordure rouge si c'est faux
-        firstChecked = false; 
+        firstNameInput.style.border = "thick solid red";
+        return false
       };
-    });
-    lastNameInput.addEventListener("input", (e) => {
-      e.preventDefault();
+    }
+
+    contactForm.lastNameCheck = function (){
       const lastNameT = lastNameInput.value;
       let lnameChecked = regexNames.test(lastNameT);
       if (lnameChecked == true && lastNameT.length >= 2) {
         lastNameErrorMess.textContent = ("");
         lastNameInput.style.border = "thick solid green";
-        lastChecked = true;
+        return true
       }
       else {
         lastNameErrorMess.style.color = "red";
-        lastNameErrorMess.style.fontSize ="0.6em"
+        lastNameErrorMess.style.fontSize = errorMsgFontSize;
         lastNameErrorMess.textContent = (`Le champ "Nom" renseigné n'est pas valide !`);
         lastNameInput.style.border = "thick solid red";
-        lastChecked = false; 
+        return false
       };
-    });
-    emailInput.addEventListener("input", (e) => {
-      e.preventDefault();
+    }
+    
+    contactForm.emailCheck = function (){
       const emailT = emailInput.value;
       let emailCheck = regexEmail.test(emailT)
       if(emailCheck) { 
         emailErrorMess.textContent = ("");
         emailInput.style.border = "thick solid green";
-        emailChecked = true;
+        return true
       }
       else {
         emailErrorMess.style.color = "red";
-        emailErrorMess.style.fontSize = "0.6em";
+        emailErrorMess.style.fontSize = errorMsgFontSize;
         emailErrorMess.textContent = (`Le champ "Email" renseigné n'est pas valide !`);
         emailInput.style.border = "thick solid red";
-        emailChecked = false; 
+        return false
       };
-    });
-    messageInput.addEventListener("input", (e) => {
-      e.preventDefault();
+    }
+
+    contactForm.messageCheck = function (){
       const messageT = messageInput.value;
       if (messageT.length >= 10) {
         messageErrorMsg.textContent = ("");
         messageInput.style.border = "thick solid green";
-        messageChecked = true;
+        return true
       }
       else {
         messageErrorMsg.style.color = "red";
-        messageErrorMsg.style.fontSize ="0.6em"
+        messageErrorMsg.style.fontSize = errorMsgFontSize;
         messageErrorMsg.textContent = (`Le message doit contenir au moins 10 caractères !`);
         messageInput.style.border = "thick solid red";
-        messageChecked = false; 
+        return false
       };
+    }
+    //Ajout d'un événement pour chaque champ du formulaire en fonction de s'il est bien rempli ou non 
+    firstNameInput.addEventListener("input", (e) => {
+      e.preventDefault();
+      contactForm.firstNameCheck();
     });
-  //A l'appuie du bouton "envoyer", actionne la fonction validate
-  contactButton.addEventListener("submit", (e) => {
-    e.preventDefault();
-    //Si tout les champs sont correctemment remplis, le formulaire s'enregistre et passe au modal suivant
-    if (firstChecked == true && lastChecked == true && emailChecked == true && messageChecked == true){
-      //Enregistrement des donnés du formulaire
-      const submit = {
-        contact: {
-          firstName: firstNameInput.value,
-          lastName: lastNameInput.value,
-          email: emailInput.value,
-          message: messageInput.value
+    lastNameInput.addEventListener("input", (e) => {
+      e.preventDefault();
+      contactForm.lastNameCheck();
+    });
+    emailInput.addEventListener("input", (e) => {
+      e.preventDefault();
+      contactForm.emailCheck();
+    });
+    messageInput.addEventListener("input", (e) => {
+      e.preventDefault();
+      contactForm.messageCheck();
+    });
+    // Function du reset du formulaire
+    contactForm.resetFormular = function () {
+      firstNameErrorMess.textContent = ("");
+      lastNameErrorMess.textContent = ("");
+      emailErrorMess.textContent = ("");
+      messageErrorMsg.textContent = ("");
+      firstNameInput.style.border = "none";
+      lastNameInput.style.border = "none";
+      emailInput.style.border = "none";
+      messageInput.style.border = "none";
+      contactButton.reset();
+    }
+
+    // A la fermeture du formulaire avec le bouton de fermeture, reset le formulaire    
+    const closeModalBtn = document.querySelector("#closeModalBtn");
+    closeModalBtn.addEventListener("click", () =>{
+      contactForm.resetFormular();
+    });
+     //A l'appuie du bouton "envoyer", vérifie tout les champs et si tout est bon, enregistre les données, les affiche en console.log et reset le formulaire
+     contactButton.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      //Execution des functions de regex à l'appui du bouton "envoyer"
+      contactForm.firstNameCheck();
+      contactForm.lastNameCheck();
+      contactForm.emailCheck();
+      contactForm.messageCheck();
+
+      //Si tout les champs sont correctemment remplis, le formulaire s'enregistre et reset le formulaire
+      if (contactForm.firstNameCheck() == true && contactForm.lastNameCheck() == true && contactForm.emailCheck() == true && contactForm.messageCheck() == true){
+        
+        //Enregistrement des données du formulaire
+        const submit = {
+          contact: {
+            firstName: firstNameInput.value,
+            lastName: lastNameInput.value,
+            email: emailInput.value,
+            message: messageInput.value,
+          }
         }
+        console.log(JSON.parse(JSON.stringify(submit))); //Données récupérées
+        //Reset du formulaire
+        contactForm.resetFormular();
       }
-      console.log(JSON.parse(JSON.stringify(submit))); //Données récupérées
-    }
-    else {
-        return
-    }
-    contactButton.reset();
-    firstNameInput.style.border = "none";
-    lastNameInput.style.border = "none";
-    emailInput.style.border = "none";
-    messageInput.style.border = "none";
-  });
+      else {
+          return // Interrompt l'enregistrement des données si les test regex retournent faux
+      }
+    });
 }
