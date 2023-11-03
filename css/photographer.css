@@ -228,23 +228,19 @@ form textarea{
     display: block;
     opacity: 1;
 }
-#date::before{
+#date::before,
+#date::after{
     content:"";
     position: absolute;
-    top: 54px;
     left: 50%;
-    transform: translateX(-50%);
+    translate:-50%;
     height: 1px;
     width: 85%;
     background-color: #fff;
 }
+#date::before{
+    top: 54px;
+}
 #date::after{
-    content:"";
-    position: absolute;
     top: 102px;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 1px;
-    width: 85%;
-    background-color: #fff;
-} 
+}
