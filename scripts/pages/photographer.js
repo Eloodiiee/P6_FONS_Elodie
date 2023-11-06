@@ -1,7 +1,7 @@
 import { photographerPage } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des infos du photographe
 import { displayMedia } from "../factories/photographersFactory.js"; // Importation de la factory pour l'affichage des medias
 import { contactForm } from "../utils/formularRegister.js"; // Importation de l'utils pour le fonctionnement du formulaire
-import { contactName } from "../utils/formularRegister.js";
+import { contactName } from "../utils/formularRegister.js"; // Importation de l'utils pour le nom du photographe sur le formulaire**
 
 // Je crée une classe qui va fetch les photographes en ne gardant que le photographe selectionné
 class thePhotographer { 
@@ -12,6 +12,7 @@ class thePhotographer {
         this.media = []; // Initialisation du this.media grace au constructor
         this.likes = 0; //  Initialisation du this.likes grace au constructor
         this.eInit(); // Initialisation du this.enit grace au constructor
+        this.index = 0;
     }
     eInit() { // Function d'initialisation du fonctionnement du formulaire
         const formModal = document.getElementById("modalRegistering") // Je sélectionne le h2 contactez-moi 
@@ -52,7 +53,7 @@ class thePhotographer {
         photographerInfos.headerData(); // Appel de la fonction headerData() à partir des infos du photographe
         photographerInfos.sortMedia(); // Appel de la fonction sortMedia() pour trier les medias
         photographerInfos.mainFunctions(); // Appel de la fonction mainFunctions() pour l'affichage du reste de la page
-        photographerInfos.contactName();// 
+        photographerInfos.contactName();// Appel de la function contactName pour l'affichage du nom du photographe sur le formulaire**
     }   
 }
 //J'instencie le photographe dans la classe "thePhotographer"
@@ -66,6 +67,7 @@ photographerInfos.mainFunctions = function () { // Function d'affichage principa
     photographerInfos.displayMedia(); // Function d'affichage des medias
     photographerInfos.bottomRightContainer(); //  Function d'affichage du container en bas à droite des likes
     photographerInfos.updateLikes(); // Function de mise à jour des likes
+    photographerInfos.lightbox();
 }
 
 photographerInfos.bottomRightContainer = function () { // Function de l'affichage du container fixé dans le coin de page en bas à droite
@@ -101,13 +103,13 @@ photographerInfos.sortMedia = function () { // function de tri des medias par fi
     const options = document.querySelectorAll(".filters li"); // Je selectionne les options de filtres
     const selected = document.querySelector(".selected"); // Je selectionne le filtre selectionné
     selectedBox.addEventListener("click", () =>{ // L'évenement au click sur le container des filtres
-        chevronCursor.classList.toggle("chevron-rotate"); // Active l'animation de rotation du cheveron
+        chevronCursor.classList.toggle("chevron-rotate"); // Active l'animation de rotation du cheveron**
         filters.classList.toggle("filters-open"); // Ouvre le menu des filtres
     });
     options.forEach(option => { // Boucle forEach pour parcourir les options de filtre
         option.addEventListener("click", () => { // L'évenement au click sur l'un des filtres
             selected.innerText = option.innerText; // Remplace le texte du container de filtre par le nouveau filtre
-            chevronCursor.classList.remove("chevron-rotate"); // Remet le cheveron dans sa position originale
+            chevronCursor.classList.remove("chevron-rotate"); // Remet le cheveron dans sa position originale**
             filters.classList.remove("filters-open"); // Ferme le menu des filtres
             options.forEach(option => { // Boucle forEach qui permet de retirer la classe active du filtre qui était actif
                 option.classList.remove("active");
@@ -157,27 +159,78 @@ photographerInfos.updateLikes = function () { // Appel de la fonction updateLike
         })
     }
 }
-photographerInfos.contactName = function (){
+photographerInfos.contactName = function (){ // appel la function contactName que j'importe plus haut**
     contactName(this.photographer);
 }
-/*const lightbox = document.createElement('div')
-lightbox.id = 'lightbox'
-document.body.appendChild(lightbox)
-
-const images = document.querySelectorAll('img')
-images.forEach(image => {
-  image.addEventListener('click', () => {
-    lightbox.classList.add('active')
-    const img = document.createElement('img')
-    img.src = image.src
-    while (lightbox.firstChild) {
-      lightbox.removeChild(lightbox.firstChild)
+photographerInfos.lightbox = function (){
+    const medias = document.querySelectorAll(".mediaBox");
+    console.log(medias);
+    this.index=0;
+    const lightbox = document.querySelector("#lightbox");
+    const closeBtn = document.querySelector("#closeBtn");
+    const rightArrow = document.querySelector(".fa-chevron-right");
+    const leftArrow = document.querySelector(".fa-chevron-left");
+    const mediaContainerLightbox = document.querySelector(".mediaContainerLightbox");
+    for (let i = 0; i < medias.length; i++) {
+        const selectedMedia = medias[i].firstChild;
+        selectedMedia.addEventListener("click", () =>{
+            this.index=i;
+            photographerInfos.displayLightbox(this.index);
+        })
     }
-    lightbox.appendChild(img)
-  })
-})
-
-lightbox.addEventListener('click', e => {
-  if (e.target !== e.currentTarget) return
-  lightbox.classList.remove('active')
-})*/
+    rightArrow.addEventListener("click", () => {
+        this.index++
+        if(this.index > medias.length-1){
+            this.index--
+            return
+        }
+        else{
+            mediaContainerLightbox.removeChild(mediaContainerLightbox.firstChild);
+            mediaContainerLightbox.removeChild(mediaContainerLightbox.lastChild);
+            photographerInfos.displayLightbox(this.index)
+        }
+    })
+    leftArrow.addEventListener("click", () => {
+        this.index--
+        if(this.index<0){
+            this.index=0;
+            return
+        }
+        else{
+            mediaContainerLightbox.removeChild(mediaContainerLightbox.firstChild);
+            mediaContainerLightbox.removeChild(mediaContainerLightbox.lastChild);
+            photographerInfos.displayLightbox(this.index)
+        } 
+    })
+    closeBtn.addEventListener("click", () =>{
+        mediaContainerLightbox.removeChild(mediaContainerLightbox.firstChild);
+        mediaContainerLightbox.removeChild(mediaContainerLightbox.lastChild);
+        lightbox.classList.remove("active");
+    })
+}
+photographerInfos.displayLightbox = function (index) {
+    const medias = document.querySelectorAll(".mediaBox");
+    const lightbox = document.querySelector("#lightbox");
+    const mediaContainerLightbox = document.querySelector(".mediaContainerLightbox");
+    lightbox.classList.add("active");
+    let media = "";
+    if(medias[index].firstChild.classList.contains("mediaImage")){
+        media = medias[index].firstChild
+        const img = document.createElement("img");
+        img.src = media.src;
+        let imgName = document.createElement("span");
+        imgName.textContent = media.alt;
+        mediaContainerLightbox.appendChild(img);
+        mediaContainerLightbox.appendChild(imgName);
+    }
+    else if(medias[index].firstChild.classList.contains("mediaVideo")){
+        media = medias[index].firstChild
+        const video = document.createElement("video");
+        let videoName = document.createElement("span");
+        videoName.textContent = media.title;
+        video.src = media.src;
+        video.setAttribute("controls", true);
+        mediaContainerLightbox.appendChild(video);
+        mediaContainerLightbox.appendChild(videoName);
+    }
+}

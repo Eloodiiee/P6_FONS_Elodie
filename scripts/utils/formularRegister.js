@@ -1,7 +1,7 @@
-export function contactName(data){
-  const {name} = data;
-  const photographerNameHeader = document.getElementById("photographerName");
-  photographerNameHeader.innerHTML = `${name}`;
+export function contactName(data){ // J'exporte la function contactName**
+  const {name} = data;//ensuite je recupere le nom du photographe**
+  const photographerNameHeader = document.getElementById("photographerName"); //  je selectionne le H2 dans lequel le nom va etre affiché**
+  photographerNameHeader.innerHTML = `${name}`; // J'affiche le nom dand le H2 **
 }
 
 export function contactForm() {

@@ -148,9 +148,12 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size: 1.4em;
 }
 form textarea{
     width: 100%;
+    font-size: 1.3em;
+    height: 150px;
 }
 .filterLabel{
     font-weight: bold;
@@ -221,14 +224,14 @@ form textarea{
 .filters li:focus{
     background-color: #DB8876;
 }
-.filters .active{
+.filters .active{ /*couleur de fond du filtre actif*/
     background: #901C1C;
 }
-.filters-open{
+.filters-open{ /*ouverture des filtres*/
     display: block;
     opacity: 1;
 }
-#date::before,
+#date::before, /*Barres separatrices et leurs parametres communs*/ 
 #date::after{
     content:"";
     position: absolute;
@@ -238,36 +241,64 @@ form textarea{
     width: 85%;
     background-color: #fff;
 }
-#date::before{
+#date::before{ /*barre separatrice du texte filtre (haut)*/
     top: 54px;
 }
-#date::after{
+#date::after{ /*barre separatrice du texte filtre (bas)*/
     top: 102px;
 }
-/*body {
-    margin: 0;
-  }
-
-  #lightbox {
+#lightbox{
+    display: none;
     position: fixed;
     z-index: 1000;
-    top: 0;
+    top:0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .8);
-    display: none;
-  }
-  
-  #lightbox.active {
-    display: flex;
-    justify-content: center;
+    background-color: rgba(0,0,0,0.3);
+}
+#lightbox.active{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
     align-items: center;
-  }
-  
-  #lightbox img {
-    max-width: 90%;
-    max-height: 80%;
-    padding: 4px;
-    background-color: black;
-    border: 2px solid white;
-  }*/
+}
+#arrowMediaContainer{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    width: 70%;
+}
+#arrowMediaContainer .fa-solid{
+    color:#901C1C;
+    font-size: 70px;
+    cursor:pointer;
+}
+.mediaCloseBtnContainer{
+    display:flex;
+    gap:20px;
+}
+.iContainer{
+    display: grid;
+    grid-template-rows: repeat(3,1fr);
+}
+.fa-chevron-right{
+    align-self: center;
+}
+.mediaContainerLightbox{
+    display: flex;
+    flex-direction: column;
+}
+.mediaContainerLightbox img,
+.mediaContainerLightbox video{
+    height: 648px;
+    object-fit: contain;
+}
+#lightbox span{
+    font-weight: 500;
+    font-size: 1.5em;
+    color: #901C1C;
+    padding: 5px;
+    background-color: rgba(255,255,255,1);
+    border-radius: 0px 0px 5px 5px;
+}

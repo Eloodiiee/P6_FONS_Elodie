@@ -96,9 +96,8 @@ export function displayMedia(data) {
       if (data[i].video) { // je teste si le media est une video ou une image
       const mediaUrl = `assets/medias/${data[i].photographerId}/${data[i].video}`; // J'assigne l'URL a une const
       mediaVideo.setAttribute("src", mediaUrl); // J'assigne l'URL a la video
-      mediaVideo.setAttribute("alt", data[i].title);// J'assigne le alt 
+      mediaVideo.setAttribute("title", data[i].title);// J'assigne le titre 
       mediaVideo.setAttribute("id", data[i].id);// J'assigne l'ID
-      mediaVideo.setAttribute("controls", true);// Attribut qui permet de jouer la video, de maniere provisoire tant qu'il n'y a pas la lightbox
       mediaImage.classList.remove("mediaImage"); // J'enlève la classe mediaImage, pour éviter d'avoir les deux classes
       mediaVideo.classList.add("mediaVideo"); // J'ajoute la classe mediaVideo
       mediaBox.appendChild(mediaVideo); // J'assigne le parent de mediaBox sur mediaVideo
