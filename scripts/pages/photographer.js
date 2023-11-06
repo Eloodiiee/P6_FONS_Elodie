@@ -27,7 +27,7 @@ class thePhotographer {
         const currentUrl = (new URL(document.location)).searchParams ; // Permet de récupérer les informations dans l'URL
         const _id = currentUrl.get('id'); // Récupération de l'ID dans l'URL
         console.log("Photographer ID : ", _id); // Affichage de l'ID grâce a l'URL
-        const response = await fetch(`./data/photographers.json`)  ////////////////////////////////////////////////////
+        const response = await fetch("./data/photographers.json")  ////////////////////////////////////////////////////
         const res = await response.json(); 
         this.data = res.photographers; // Séparation du JSON pour ne garder que les photographes
         console.log("Photographers Array : ", this.data); // Affichage du photographes
