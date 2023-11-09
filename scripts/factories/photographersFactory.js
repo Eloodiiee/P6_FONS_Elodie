@@ -60,7 +60,7 @@ export function photographerPage(data){
   const portraitPhotograph = `assets/photographers/${portrait}`; 
   const imgPhotograph = document.createElement("img"); 
   imgPhotograph.setAttribute("src", portraitPhotograph); 
-  imgPhotograph.setAttribute("alt", " ");
+  imgPhotograph.setAttribute("alt", "");
 
   headerPortrait.appendChild(imgPhotograph); 
   return headerPhotograph
@@ -82,11 +82,11 @@ export function displayMedia(data, displayLightboxCallback) {
       mediaUrl = `assets/medias/${data[i].photographerId}/${data[i].video}`;
       mediaElement.setAttribute("title", data[i].title);
       mediaElement.classList.add("mediaVideo");
-      mediaElement.setAttribute("controls", "");
+      //mediaElement.setAttribute("controls", "");
     } else {
       mediaElement = document.createElement("img");
       mediaUrl = `assets/medias/${data[i].photographerId}/${data[i].image}`;
-      mediaElement.setAttribute("alt", data[i].title);
+      mediaElement.setAttribute("alt", "");
       mediaElement.classList.add("mediaImage");
     }
 

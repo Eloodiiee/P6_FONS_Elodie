@@ -45,22 +45,22 @@
             <h2>Contactez-moi</h2>
             <h2 id="photographerName"></h2>
           </div>
-          <img src="assets/icons/close.svg" onclick="closeModal()" alt="Bouton de Fermeture du formulaire" id="closeModalBtn"/>
+         <img src="assets/icons/close.svg" onclick="closeModal()" alt="close contact" aria-label="Fermer la modale"/>
         </header>
 				<form id="contactForm" action="" method="post">
 					<div class="formData">
 						<label for="first">Prénom</label><br>
-            <input class="text-control" type="text" id="first" name="first"/><br>
+            <input class="text-control" type="text" id="first" name="first" aria-required="true"/><br>
             <p id="firstNameErrorMsg"></p> <!--Message d'erreur du champ prénom-->
           </div>
           <div class="formData">
             <label for="last">Nom</label><br>
-            <input class="text-control" type="text" id="last" name="last"/><br>
+            <input class="text-control" type="text" id="last" name="last" aria-required="true"/><br>
             <p id="lastNameErrorMsg"></p> <!--Message d'erreur du champ nom-->
           </div>
           <div class="formData">
             <label for="email">E-mail</label><br>
-            <input class="text-control" type="email" id="email" name="email"/><br>
+            <input class="text-control" type="email" id="email" name="email" aria-required="true"/><br>
             <p id="emailErrorMsg"></p> <!--Message d'erreur du champ email-->
           </div>
           <div class="formData">
