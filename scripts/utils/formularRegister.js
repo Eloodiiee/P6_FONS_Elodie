@@ -122,11 +122,11 @@ export function contactForm() {
       contactButton.reset();
     }
 
-   /* // A la fermeture du formulaire avec le bouton de fermeture, reset le formulaire    
+    // A la fermeture du formulaire avec le bouton de fermeture, reset le formulaire    
     const closeModalBtn = document.querySelector("#closeModalBtn");
     closeModalBtn.addEventListener("click", () =>{
       contactForm.resetFormular();
-    });*/
+    });
      //A l'appuie du bouton "envoyer", vérifie tout les champs et si tout est bon, enregistre les données, les affiche en console.log et reset le formulaire
      contactButton.addEventListener("submit", (e) => {
       e.preventDefault();
