@@ -18,7 +18,7 @@ export function articlePhotographer(data) {
   img.classList.add("imgPortrait");
   img.setAttribute("id", country);
   img.setAttribute("src", portraitUrl);
-  img.setAttribute("alt", " ");
+  img.setAttribute("alt", "");
 
   nameContainer.textContent = name;
   placeContainer.textContent = `${city}, ${country}`;
@@ -76,6 +76,7 @@ export function displayMedia(data, displayLightboxCallback) {
     
     let mediaElement;
     let mediaUrl;
+    let tabIndexValue = 0;
 
     if (data[i].video) {
       mediaElement = document.createElement("video");
@@ -88,11 +89,15 @@ export function displayMedia(data, displayLightboxCallback) {
       mediaElement.setAttribute("alt", "");
       mediaElement.classList.add("mediaImage");
     }
-
+    tabIndexValue = i+13;
+    mediaElement.setAttribute("tabIndex", tabIndexValue);
     mediaElement.setAttribute("src", mediaUrl);
     mediaElement.setAttribute("id", data[i].id);
     mediaElement.dataset.index = i;/**/ 
-
+    const mediaLikesHeart = document.createElement("i");
+    mediaLikesHeart.classList.add("fa-regular", "fa-heart", "likeBtn");
+    tabIndexValue++;
+    mediaLikesHeart.setAttribute("tabIndex",tabIndexValue); 
     /**/ 
     mediaElement.addEventListener("click", (e) => {
       displayLightboxCallback(parseInt(e.target.dataset.index));
@@ -112,9 +117,7 @@ export function displayMedia(data, displayLightboxCallback) {
     mediaLikesValue.classList.add("likeValue");
     mediaLikesValue.innerHTML = `${data[i].likes} `;
 
-    const mediaLikesHeart = document.createElement("i");
-    mediaLikesHeart.classList.add("fa-regular", "fa-heart", "likeBtn");
-
+    
     mediaLikes.appendChild(mediaLikesValue);
     mediaLikes.appendChild(mediaLikesHeart);
 

@@ -262,25 +262,28 @@ form textarea{
     justify-content:space-evenly;
     align-items: center;
 }
-#arrowMediaContainer{
+#lightboxContainer{
     display:flex;
-    justify-content:center;
+    justify-content:space-around;
     align-items:center;
-    gap:20px;
     width: 70%;
+    position: relative;
 }
-#arrowMediaContainer .fa-solid{
+#lightboxContainer .fa-solid{
     color:#901C1C;
     font-size: 70px;
     cursor:pointer;
 }
-.mediaCloseBtnContainer{
-    display:flex;
-    gap:20px;
-}
 .iContainer{
+    position: absolute;
+    left: 110%;
     display: grid;
     grid-template-rows: repeat(3,1fr);
+    height: 100%;
+}
+.fa-chevron-left{
+    position: absolute;
+    left: -15%;
 }
 .fa-chevron-right{
     align-self: center;

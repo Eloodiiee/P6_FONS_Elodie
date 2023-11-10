@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <a href="index.html">
+      <a href="index.html" tabindex="1">
         <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
     </a>
     </header>
@@ -18,22 +18,22 @@
       <div class="photograph-header">
         <div class="infoContainer"></div>
         <div class="btnContainer">
-          <button id="modalRegistering" class="contact_button" name="Contact Me" onclick="displayModal()">Contactez-moi</button>
+          <button id="modalRegistering" tabindex="2" class="contact_button" name="Contact Me" onclick="displayModal()">Contactez-moi</button>
         </div>
         <div class="photoContainer"></div>
       </div>
       <div class="filtersDropdown">
         <div class="filtersFlex">
           <span for="filter" class="filterLabel" id="filter">Trier par</span>
-          <div class="selectedBox">
-            <span class="selected" value="likes">Popularité</span>
+          <div class="selectedBox" tabindex="9">
+            <span class="selected" value="likes" role="filter already selected">Popularité</span>
             <i class="fa-solid fa-chevron-down"></i>
           </div>
         </div>
-        <ul class="filters">
-          <li value="likes" class="active" id="popular">Popularité</li>
-          <li value="date" id="date">Date</li>
-          <li value="title" id="title">Titre</li>
+        <ul class="filters" role="filters">
+          <li value="likes" class="active" id="popular" tabindex="10" role="filter popular">Popularité</li>
+          <li value="date" id="date" tabindex="11" role="filter date">Date</li>
+          <li value="title" id="title" tabindex="12" role="filter title">Titre</li>
         </ul>
       </div>
       <div id="mediaContainer"></div>
@@ -45,44 +45,42 @@
             <h2>Contactez-moi</h2>
             <h2 id="photographerName"></h2>
           </div>
-         <img src="assets/icons/close.svg" onclick="closeModal()" alt="close contact" id="closeModalBtn" aria-label="Fermer la modale"/>
+         <img src="assets/icons/close.svg" onclick="closeModal()" alt="close contact" id="closeModalBtn" tabindex="3" aria-label="Fermer la modale"/>
         </header>
 				<form id="contactForm" action="" method="post">
 					<div class="formData">
 						<label for="first">Prénom</label><br>
-            <input class="text-control" type="text" id="first" name="first" aria-required="true"/><br>
+            <input class="text-control" type="text" id="first" name="first" tabindex="4" aria-required="true"/><br>
             <p id="firstNameErrorMsg"></p> <!--Message d'erreur du champ prénom-->
           </div>
           <div class="formData">
             <label for="last">Nom</label><br>
-            <input class="text-control" type="text" id="last" name="last" aria-required="true"/><br>
+            <input class="text-control" type="text" id="last" name="last" tabindex="5" aria-required="true"/><br>
             <p id="lastNameErrorMsg"></p> <!--Message d'erreur du champ nom-->
           </div>
           <div class="formData">
             <label for="email">E-mail</label><br>
-            <input class="text-control" type="email" id="email" name="email" aria-required="true"/><br>
+            <input class="text-control" type="email" id="email" name="email" tabindex="6" aria-required="true"/><br>
             <p id="emailErrorMsg"></p> <!--Message d'erreur du champ email-->
           </div>
           <div class="formData">
 						<label for="message">Message</label><br>
-            <textarea name="message" id="message" cols="30" rows="10" aria-required="true"></textarea><br>
+            <textarea name="message" id="message" cols="30" rows="10" tabindex="7" aria-required="true"></textarea><br>
             <p id="messageErrorMsg"></p> <!--Message d'erreur du champ Message-->
           </div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" tabindex="8">Envoyer</button>
 				</form>
 			</div>
 		</div>
     <script type="module" src="./scripts/pages/photographer.js"></script> 
     <script src="./scripts/utils/contactForm.js"></script>
     <div id="lightbox">
-      <div id="arrowMediaContainer">
+      <div id="lightboxContainer">
         <i class="fa-solid fa-chevron-left"></i>
-        <div class="mediaCloseBtnContainer">
-          <div class="mediaContainerLightbox"></div>
-          <div class="iContainer">
-            <i id="closeBtn" class="fa-solid fa-xmark"></i>
-            <i class="fa-solid fa-chevron-right"></i>
-          </div>
+        <div class="mediaContainerLightbox"></div>
+        <div class="iContainer">
+          <i id="closeBtn" class="fa-solid fa-xmark"></i>
+          <i class="fa-solid fa-chevron-right"></i>
         </div>
       </div>
     </div>
