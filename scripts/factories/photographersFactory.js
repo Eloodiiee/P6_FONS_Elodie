@@ -82,7 +82,6 @@ export function displayMedia(data, displayLightboxCallback) {
       mediaUrl = `assets/medias/${data[i].photographerId}/${data[i].video}`;
       mediaElement.setAttribute("title", data[i].title);
       mediaElement.classList.add("mediaVideo");
-      //mediaElement.setAttribute("controls", "");
     } else {
       mediaElement = document.createElement("img");
       mediaUrl = `assets/medias/${data[i].photographerId}/${data[i].image}`;
@@ -92,13 +91,13 @@ export function displayMedia(data, displayLightboxCallback) {
 
     mediaElement.setAttribute("src", mediaUrl);
     mediaElement.setAttribute("id", data[i].id);
-    mediaElement.dataset.index = i;
+    mediaElement.dataset.index = i;/**/ 
 
-    
+    /**/ 
     mediaElement.addEventListener("click", (e) => {
       displayLightboxCallback(parseInt(e.target.dataset.index));
-    });
-
+    });/**/
+    
     const mediaSubBox = document.createElement("div");
     mediaSubBox.classList.add("mediaSubBox");
 

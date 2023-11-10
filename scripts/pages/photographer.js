@@ -146,7 +146,7 @@ photographerInfos.sortMedia = function () {
       photographerInfos.displayMedia();
       photographerInfos.updateMediaClickHandlers();
       photographerInfos.updateLikes();
-      /** Réinitialise l'index de la lightbox si le média est visible **/
+      /******* Réinitialise l'index de la lightbox si le média est visible ****/
       if (this.index >= 0 && this.index < this.media.length) {
         const currentLightboxMedia = this.media[this.index];
         this.index = this.media.findIndex(
@@ -189,7 +189,7 @@ photographerInfos.updateLikes = function () {
     });
   }
 };
- /** appel la function contactName que j'importe plus haut **/
+ /** appelle la function contactName que j'importe plus haut **/
 photographerInfos.contactName = function () {
   contactName(this.photographer);
 };
